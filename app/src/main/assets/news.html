@@ -27,29 +27,34 @@
 
 
         function hideCategories(){
+           console.log("hideCategories()");
            hdrCategoriesVar.hide();
            contentCategoriesVar.hide();
            ftrCategoriesVar.hide();
         }
         function hideSelect(){
+           console.log("hideSelect()");
            hdrSelectVar.hide();
            contentSelectVar.hide();
            ftrSelectVar.hide();
         }
 
         function hideNews(){
+           console.log("hideNews()");
            hdrNewsVar.hide();
            contentNewsVar.hide();
            ftrNewsVar.hide();
         }
 
         function hideProgress(){
+           console.log("hideProgress()");
            hdrProgressVar.hide();
            contentProgressVar.hide();
            ftrProgressVar.hide();
         }
 
         function showCategories(){
+           console.log("showCategories()");
            hideSelect();
            hideProgress();
            hideNews();
@@ -59,6 +64,7 @@
         }
 
         function showSelect(){
+           console.log("showSelect()");
            hideCategories();
            hideProgress();
            hideNews();
@@ -68,6 +74,7 @@
         }
 
         function showNews(){
+           console.log("showNews()");
            hideCategories();
            hideSelect();
            hideProgress();
@@ -77,6 +84,7 @@
         }
 
         function showProgress(){
+           console.log("showProgress()");
            hideCategories();
            hideSelect();
            hideNews();
@@ -195,6 +203,71 @@
             window.location = varURI;
           });
         }
+
+        var COOKIE_NAME = 'news';
+        var COMMA = ',';
+        var EMPTY = '';
+        var LI = 'li';
+        var PAR = 'p';
+        var ID = 'id';
+
+        var currentNewsVar = $('#currentNews');
+
+        function storeCurrentNews(){
+           console.log("storeCurrentNews()");
+           $.DSt.set(COOKIE_NAME, EMPTY);
+           var tmp = EMPTY;
+           currentNewsVar.find(LI).each(function(){
+              tmp = tmp + COMMA + $(this).find(PAR).attr(ID).substring(4);
+           });
+           $.DSt.set(COOKIE_NAME, tmp.substring(1));
+        }
+
+        var buttonGetCategoryVar = $('#buttonGetCategory');
+        var categoryVar = $('#category');
+        var EMPTY = '';
+
+        buttonGetCategoryVar.click(function() {
+           console.log("buttonGetCategoryVar Click");
+           if(categoryVar.val() != EMPTY){
+              showProgress();
+              return getNews(categoryVar.val(),addNews);
+           }else{
+              showCategories();
+              return false;
+           }
+        });
+
+        function addNews(xml){
+           console.log("addNews()");
+           populateSingleNews(xml);
+           storeCurrentNews();
+           showCategories();
+        }
+
+        var buttonAddCategoryVar = $('#buttonAddCategory');
+
+        buttonAddCategoryVar.click(function() {
+           console.log("buttonAddCategoryVar Click");
+           showSelect();
+           return false;
+        });
+
+        var buttonHdrShowCategoriesVar = $('#buttonHdrShowCategories');
+        var buttonFtrShowCategoriesVar = $('#buttonFtrShowCategories');
+
+        buttonHdrShowCategoriesVar.click(function() {
+            console.log("buttonHdrShowCategoriesVar Click");
+           showCategories();
+           return false;
+        });
+
+        buttonFtrShowCategoriesVar.click(function() {
+           console.log("buttonFtrShowCategoriesVar Click");
+           showCategories();
+           return false;
+        });
+
         }
 
     </script>
@@ -206,7 +279,7 @@
 <div data-role="page" data-theme="b" id="Categories">
     <div data-role="header" id="hdrCategories" data-nobackbtn="true">
         <h1>Categories</h1>
-        <a id="buttonAddCategory" data-icon="plus" class="ui-btn-left" href="#CategorySelection"
+        <a id="buttonAddCategory" data-icon="plus" class="ui-btn-left" href=""
            data-role="button" data-inline="true">Add</a>
     </div>
 
@@ -235,7 +308,7 @@
                     <option value='politics'>Politics</option>
                 </select>
             </div>
-            <a id="buttonGetCategory" href="#Categories" data-role="button" data-inline="true">Get Category</a>
+            <a id="buttonGetCategory" href="" data-role="button" data-inline="true">Get Category</a>
         </form>
     </div>
 
