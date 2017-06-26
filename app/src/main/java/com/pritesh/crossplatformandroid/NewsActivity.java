@@ -33,9 +33,16 @@ public class NewsActivity extends AppCompatActivity
 
     private class NewsClient extends WebViewClient
     {
+        /*
         public boolean shouldOverrideUrlLoading(WebView view, String url)
         {
             view.loadUrl(url);
+            return true;
+        }
+        */
+
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl("javascript:changeLocation('" + url + "')");
             return true;
         }
     }

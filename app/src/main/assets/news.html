@@ -94,13 +94,17 @@
 
           showProgress();
           var storedNewsTxt = $.DSt.get(COOKIE_NAME);
+           console.log(COOKIE_NAME + " numNewsToRestore : " + storedNewsTxt);
 
           if(storedNewsTxt != null && storedNewsTxt.length > 0){
              storedNewsArr = storedNewsTxt.split(COMMA);
+             console.log("numNewsToRestore : 1");
           }else{
              storedNewsArr = new Array();
+             console.log("numNewsToRestore : 2");
           }
           numNewsToRestore = storedNewsArr.length;
+          console.log("numNewsToRestore" + numNewsToRestore);
           restore();
         });
 
