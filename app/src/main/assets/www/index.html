@@ -130,7 +130,7 @@
 	  var buttonAddCategoryVar = $('#buttonAddCategory');
 	  var categoryVar = $('#category');
 	  
-	 cna
+
 
 	$(document).ready(function () {   	   
      showProgress();
@@ -239,7 +239,7 @@
     function getNews(varCat,handler){
       var varURI = NEWS_URI + varCat;
       
-	  $.ajax({type: GET, dataType: XML, url: varURI, success: handler});
+	  $.ajax({type: GET, dataType: 'jsonp', url: varURI, success: handler});
       return false; 
     }
    

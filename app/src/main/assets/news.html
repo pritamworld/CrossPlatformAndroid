@@ -253,6 +253,9 @@
            $.ajax({
               type: GET,
               dataType: 'jsonp',
+              beforeSend: function( xhr ) {
+                xhr.overrideMimeType( "application/xml" );
+               },
               url: varURI,
               success: handler});
            return false;
@@ -270,7 +273,7 @@
           var tmpTxt = EMPTY;
           $(xml).find(ITEM).each(function()
           {
-              var txt = $(this).find(LINK).text();
+              var txt = $(this).find(DESCR).text();
               tmpTxt = tmpTxt + HTML_FRG7 + txt + HTML_FRG8;
           });
 
